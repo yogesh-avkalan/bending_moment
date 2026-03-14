@@ -5,21 +5,26 @@ type Props = {
 };
 
 export default function Beam({ curvature }: Props) {
-  const width = 400;
-  const height = 80;
 
-  const points = 80;
+  const viewWidth = 1000;
+  const viewHeight = 400;
 
-  const top = [];
-  const bottom = [];
+  const beamHeight = 80;
+  const centerY = 200;
 
-  for (let i = 0; i <= points; i++) {
-    const x = (i / points) * width - width / 2;
+  const segments = 120;
+
+  const top: string[] = [];
+  const bottom: string[] = [];
+
+  for (let i = 0; i <= segments; i++) {
+
+    const x = (i / segments) * viewWidth - viewWidth / 2;
 
     const y = curvature * x * x;
 
-    top.push(`${x + width / 2},${200 + y - height / 2}`);
-    bottom.push(`${x + width / 2},${200 + y + height / 2}`);
+    top.push(`${x + viewWidth / 2},${centerY + y - beamHeight / 2}`);
+    bottom.push(`${x + viewWidth / 2},${centerY + y + beamHeight / 2}`);
   }
 
   const path =
@@ -30,11 +35,16 @@ export default function Beam({ curvature }: Props) {
     " Z";
 
   return (
-    <svg width={width} height={400} className="border rounded-md">
-      <path d={path} fill="#7ea1c4" stroke="#6b7a8f" />
+    <svg
+      width="100%"
+      viewBox={`0 0 ${viewWidth} ${viewHeight}`}
+      preserveAspectRatio="xMidYMid meet"
+      className="border rounded-md bg-gray-50"
+    >
+      <path d={path} fill="#7ea1c4" stroke="#6b7a8f" strokeWidth={2} />
 
-      <Rod x={150} curvature={curvature} />
-      <Rod x={250} curvature={curvature} />
+      <Rod x={350} curvature={curvature} />
+      <Rod x={650} curvature={curvature} />
     </svg>
   );
 }

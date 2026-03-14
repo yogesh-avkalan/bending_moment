@@ -4,7 +4,8 @@ type Props = {
 };
 
 export default function Rod({ x, curvature }: Props) {
-  const centerX = x - 200;
+
+  const centerX = x - 500;
 
   const y = curvature * centerX * centerX;
 
@@ -12,23 +13,19 @@ export default function Rod({ x, curvature }: Props) {
 
   const angle = Math.atan(slope);
 
-  const length = 120;
+  const centerY = 200;
 
-  const x1 = x;
-  const y1 = 200 + y - length / 2;
-
-  const x2 = x;
-  const y2 = 200 + y + length / 2;
+  const rodLength = 160;
 
   return (
     <line
-      x1={x1}
-      y1={y1}
-      x2={x2}
-      y2={y2}
+      x1={x}
+      y1={centerY + y - rodLength / 2}
+      x2={x}
+      y2={centerY + y + rodLength / 2}
       stroke="black"
-      strokeWidth={3}
-      transform={`rotate(${(angle * 180) / Math.PI} ${x} ${200 + y})`}
+      strokeWidth={4}
+      transform={`rotate(${(angle * 180) / Math.PI} ${x} ${centerY + y})`}
     />
   );
 }
