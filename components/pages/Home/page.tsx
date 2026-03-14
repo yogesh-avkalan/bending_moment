@@ -1,9 +1,9 @@
-import AxisWidget from '@/components/section/axis-widget'
+import BendingWidget from '@/components/section/BendingWidget'
 
 export const HomePage = () => {
   return (
     <main className="p-10">
-      <AxisWidget />
+      <BendingWidget />
     </main>
   )
 }
